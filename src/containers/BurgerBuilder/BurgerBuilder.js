@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger.js';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls.js';
-
+import Modal from '../../components/UI/Modal/Modal.js';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary.js';
 const INGREDIENT_PRICE = {
 	salad: 0.5,
 	cheese: 0.4,
@@ -22,7 +23,8 @@ class BurgerBuilder extends Component{
 				meat: 0
 			},
 			totalPrice: 4,
-			purchasable: false
+			purchasable: false,
+			purchasing: false
 		}
 	}
 
@@ -58,15 +60,25 @@ class BurgerBuilder extends Component{
 		this.updatePurchaseState(newIngredient);
 	}
 
+	purchaseHandler = () => {
+		this.setState({purchasing: true})
+	}
+
+	purchaseCancelHandler = () => {
+		this.setState({purchasing: false});
+	}
 	render(){
 		
-		const disabledButton = {...this.state.ingredients};//create an object with booleans based on the ingredients object
+		const disabledButton = {...this.state.ingredients};//create an object with booleans based on no of the ingredients object
 		for(let key in disabledButton){
 			disabledButton[key] = disabledButton[key] <= 0; //false if there are 0, true if there are more than 0 ingredients
 		}
 
 		return(
 			<Aux>
+				<Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
+					<OrderSummary ingredients={this.state.ingredients} />
+				</Modal>
 				<Burger ingredients={this.state.ingredients}/>
 				<BuildControls 
 					ingredientAdded={this.addIngredientHandler} 
@@ -74,6 +86,7 @@ class BurgerBuilder extends Component{
 					disabled={disabledButton}
 					price={this.state.totalPrice}
 					purchasable={!this.state.purchasable}
+					ordered={this.purchaseHandler}
 					/>
 			</Aux>
 		);

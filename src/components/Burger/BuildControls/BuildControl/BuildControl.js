@@ -6,7 +6,6 @@ const buildControl = props => {
 
 	return(
 		<div className={classes.BuildControl}>
-			<p>Current price: {props.price}</p>
 			<div className={classes.Label}>{props.label}</div>
 			<button 
 				className={classes.Less} 
