@@ -6,3 +6,7 @@
 .App body{
   background-color: #1BF3DE;
 }
+
+ul{
+	list-style-type: none;
+}
