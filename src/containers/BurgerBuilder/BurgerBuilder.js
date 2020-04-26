@@ -67,6 +67,11 @@ class BurgerBuilder extends Component{
 	purchaseCancelHandler = () => {
 		this.setState({purchasing: false});
 	}
+
+	purchaseContinueHandler = () => {
+		alert('You continued!');
+	}
+
 	render(){
 		
 		const disabledButton = {...this.state.ingredients};//create an object with booleans based on no of the ingredients object
@@ -77,7 +82,10 @@ class BurgerBuilder extends Component{
 		return(
 			<Aux>
 				<Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
-					<OrderSummary ingredients={this.state.ingredients} />
+					<OrderSummary 
+						ingredients={this.state.ingredients} 
+						cancel={this.purchaseCancelHandler}
+						continue={this.purchaseContinueHandler}/>
 				</Modal>
 				<Burger ingredients={this.state.ingredients}/>
 				<BuildControls 
