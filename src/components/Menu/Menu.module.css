@@ -1,0 +1,19 @@
+.Hamburger{
+  visibility: hidden;
+}
+@media (max-width: 499px){
+  .Hamburger{
+    visibility: visible;
+    cursor: pointer;
+    width: 30px;
+  }
+  
+  .Hamburger div{
+  
+    height: 3px;
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
+    background-color: white;
+  }
+}

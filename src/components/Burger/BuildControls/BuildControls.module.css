@@ -1,4 +1,5 @@
 .BuildControls{
+    position: fixed;
     width: 100%;
     background: #cf8f2e;
     display: flex;

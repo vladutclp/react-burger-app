@@ -1,11 +1,9 @@
 .App {
   text-align: center;
-  background-color: #1BF3DE;
+ 
 }
 
-.App body{
-  background-color: #1BF3DE;
-}
+
 
 ul{
 	list-style-type: none;
