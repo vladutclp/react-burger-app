@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
-import Aux from '../../hoc/Aux';
-import Burger from '../../components/Burger/Burger.js';
+import Aux 					 from '../../hoc/Aux';
+import Burger 			 from '../../components/Burger/Burger.js';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls.js';
-import Modal from '../../components/UI/Modal/Modal.js';
-import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary.js';
+import Modal 				 from '../../components/UI/Modal/Modal.js';
+import OrderSummary  from '../../components/Burger/OrderSummary/OrderSummary.js';
+import axios 				 from '../../axios.js';
+
 const INGREDIENT_PRICE = {
-	salad: 0.5,
+	salad:  0.5,
 	cheese: 0.4,
-	meat: 1.3,
-	bacon: 0.7
+	meat:   1.3,
+	bacon:  0.7
 }
 
 class BurgerBuilder extends Component{
@@ -69,7 +71,29 @@ class BurgerBuilder extends Component{
 	}
 
 	purchaseContinueHandler = () => {
-		alert('You continued!');
+		//alert('You continued!');
+		const order = {
+			ingredients: 		this.state.ingredients,
+			price: 			 		this.state.totalPrice,
+			customer: {
+				name:      		'ClapsHydra',
+				adress: {
+					street:  		'Love street',
+					zipCode: 		'4200000',
+					country: 		'Gibonia'
+				},
+				email:     		'claps@gibonia.com'
+			},
+			deliveryMethod: 'fastest'
+		};
+
+		axios.post('/orders.json', order)
+		    .then(response =>{
+					console.log(response);
+				})
+				.catch(error => {
+					console.log(error);
+				})
 	}
 
 	render(){
